@@ -113,8 +113,8 @@ def get_last_number(n, k):
             else:
                 total_number += 1
         people_list.delete(total_number)
-        if total_number == len(people_list) - 1:
-            total_number = 0
+        # if total_number == len(people_list) - 1:
+        #     total_number = 0
     return people_list
 
 # (1,2,3,4,5)
@@ -132,7 +132,7 @@ def test(n, k):
     return ans + 1
 
 
-a = get_last_number(5, 3)
+a = get_last_number(10, 3)
 print(f"结果为{a}")
-b = test(5, 3)
+b = test(8, 4)
 print(f"正确结果为{b}")
