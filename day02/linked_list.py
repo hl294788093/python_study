@@ -93,7 +93,6 @@ class LinkedList(object):
 def get_last_number(n, k):
     """有n个人，依次报数到k的离开，最后返回剩下的人的编号"""
     people_list = LinkedList()
-    count = 0  # 计数器
     total_number = 0  # 报数到第几号
     for i in range(1, n + 1):
         people_list.append(i)
@@ -107,5 +106,5 @@ def get_last_number(n, k):
     return people_list
 
 
-a = get_last_number(10, 3)
-print(f"最后留下的人为{a}号")
+last_number = get_last_number(10, 3)
+print(f"最后留下的人为{last_number}号")
