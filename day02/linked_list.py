@@ -1,9 +1,9 @@
 class Node(object):
     """链表节点"""
 
-    def __init__(self, data, pnext=None):
+    def __init__(self, data, node_next=None):
         self.data = data
-        self.next = pnext
+        self.next = node_next
 
     def __repr__(self):
         return str(self.data)
@@ -65,7 +65,7 @@ class LinkedList(object):
             self.length -= 1
 
     def get_item(self, index):
-        """查找一个节点的索引"""
+        """查找索引对应节点值"""
         if self.is_empty() or index < 0 or index >= self.length:
             print("error:index out of bounds")
             return
@@ -97,15 +97,6 @@ def get_last_number(n, k):
     total_number = 0  # 报数到第几号
     for i in range(1, n + 1):
         people_list.append(i)
-    # while len(people_list) != 1:
-    #     count += 1
-    #     total_number += 1
-    #     if total_number == len(people_list) - 1:
-    #         total_number = 0
-    #     if count == k:
-    #         people_list.delete(total_number)
-    #         count = 0
-    #         total_number -= 1
     while len(people_list) > 1:
         for j in range(1, k):
             if total_number == len(people_list) - 1:
@@ -113,26 +104,8 @@ def get_last_number(n, k):
             else:
                 total_number += 1
         people_list.delete(total_number)
-        # if total_number == len(people_list) - 1:
-        #     total_number = 0
     return people_list
-
-# (1,2,3,4,5)
-# (1,2,4,5)
-# (2,4,5)
-# (2,4)
-# (4)
-
-
-def test(n, k):
-    ans = 0
-    i = 0
-    for i in range(1, n+1):
-        ans = (ans + k) % i
-    return ans + 1
 
 
 a = get_last_number(10, 3)
-print(f"结果为{a}")
-b = test(8, 4)
-print(f"正确结果为{b}")
+print(f"最后留下的人为{a}号")
