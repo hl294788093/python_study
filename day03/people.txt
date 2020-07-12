@@ -1,0 +1,10 @@
+{"name": "john", "age": "22", "sex": "boy"}
+{"name": "jim", "age": "23", "sex": "boy"}
+{"name": "amy", "age": "21", "sex": "girl"}
+{"name": "jack", "age": "20", "sex": "boy"}
+{"name": "petty", "age": "23", "sex": "girl"}
+{"name": "kobe", "age": "20", "sex": "boy"}
+{"name": "james", "age": "24", "sex": "boy"}
+{"name": "curry", "age": "25", "sex": "girl"}
+{"name": "jordan", "age": "22", "sex": "boy"}
+{"name": "smith", "age": "20", "sex": "boy"}
