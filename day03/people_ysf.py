@@ -33,6 +33,11 @@ def joseph_ring(people_list, step, start_number):
     return people_list
 
 
+# 测试代码
+def test_joseph(peoples):
+    assert (joseph_ring(peoples, 3, 0)[0].number == 4)
+
+
 if __name__ == "__main__":
     john = People("john", "22", "boy", 1)
     jim = People("jim", "23", "boy", 2)
@@ -45,5 +50,6 @@ if __name__ == "__main__":
     jordan = People("jordan", "21", "boy", 9)
     smith = People("smith", "22", "girl", 10)
     peoples = [john, jim, amy, jack, petty, kobe, james, curry, jordan, smith]
-    last_people = joseph_ring(peoples, 3, 5)[0]
+    # test_joseph(peoples)
+    last_people = joseph_ring(peoples, 3, 4)[0]
     print(f"最后一个人名字:{last_people.name}, 年龄:{last_people.age}, 性别:{last_people.sex}, 编号:{last_people.number}")
