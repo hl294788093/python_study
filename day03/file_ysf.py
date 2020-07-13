@@ -1,36 +1,24 @@
-import io
 import json
+from day03.people_ysf import *
 
 
-class People(object):
-    def __init__(self, name, age, sex):
-        self._name = name
-        self._age = age
-        self._sex = sex
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def age(self):
-        return self._age
-
-    @property
-    def sex(self):
-        return self._sex
+def get_people_list_from_txt():
+    """从文件读取json字符串转换为people对象列表"""
+    str_people_list = open("/Users/huangliang/Documents/python/PythonProject/python_study/day03/people.txt", "r")
+    people_list = []
+    for str_people in str_people_list:
+        people = json.loads(str_people, object_hook=dict_to_people)
+        people_list.append(people)
+    str_people_list.close()
+    return people_list
 
 
-def get_people_from_txt():
-    f = open("/Users/huangliang/Documents/python/PythonProject/python_study/day03/people.txt", "r+")
-    people = f.readline()
-    f.close()
-    return people
+def dict_to_people(d):
+    """将json字符串转为people对象"""
+    return People(d['name'], d['age'], d['sex'], d['number'])
 
 
-def dict2people(d):
-    return People(d['name'], d['age'], d['sex'])
-
-
-people = get_people_from_txt()
-print(json.loads(people, object_hook=dict2people))
+if __name__ == "__main__":
+    people_list = get_people_list_from_txt()
+    last_people = joseph_ring(people_list, 3, 8)[0]
+    print(f"最后一个人名字:{last_people.name}, 年龄:{last_people.age}, 性别:{last_people.sex}, 编号:{last_people.number}")
