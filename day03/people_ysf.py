@@ -1,13 +1,9 @@
 class People(object):
     def __init__(self, name, age, sex, number):
-        self._name = name
+        self.name = name
         self._age = age
         self._sex = sex
         self._number = number
-
-    @property
-    def name(self):
-        return self._name
 
     @property
     def age(self):

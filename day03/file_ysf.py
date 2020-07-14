@@ -2,9 +2,9 @@ import json
 from day03.people_ysf import *
 
 
-def get_people_list_from_txt():
+def get_people_list_from_txt(file_location):
     """从文件读取json字符串转换为people对象列表"""
-    str_people_list = open("/Users/huangliang/Documents/python/PythonProject/python_study/day03/people.txt", "r")
+    str_people_list = open(file_location, "r")
     people_list = []
     for str_people in str_people_list:
         people = json.loads(str_people, object_hook=dict_to_people)
@@ -24,7 +24,8 @@ def test_file_read(people_list):
 
 
 if __name__ == "__main__":
-    people_list = get_people_list_from_txt()
+    file_location = "/Users/huangliang/Documents/python/PythonProject/python_study/day03/people.txt"
+    people_list = get_people_list_from_txt(file_location)
     # test_file_read(people_list)
     last_people = joseph_ring(people_list, 3, 8)[0]
     print(f"最后一个人名字:{last_people.name}, 年龄:{last_people.age}, 性别:{last_people.sex}, 编号:{last_people.number}")
