@@ -28,7 +28,7 @@ class Joseph(object):
         """获取约瑟夫环最后剩下的人"""
         if start_number + step < 0:
             raise IndexError("error:起点加间隔小于0")
-        if step < 0:
+        if step < 0 or step < len(self._people_list):
             raise ValueError("error:间隔step小于0")
         while len(self._people_list) > 1:
             for i in range(1, step):

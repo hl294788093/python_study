@@ -5,11 +5,11 @@ import json
 
 def get_joseph_from_txt(file_location, joseph):
     """从文件读取json字符串转换为people对象追加到joseph对象列表"""
-    str_people_list = open(file_location, "r")
-    for str_people in str_people_list:
+    fp = open(file_location, "r")
+    for str_people in fp:
         people = json.loads(str_people, object_hook=json_to_people)
         joseph.append(people)
-    str_people_list.close()
+    fp.close()
     return joseph
 
 
@@ -45,8 +45,8 @@ if __name__ == "__main__":
     joseph = Joseph()
     file_location = "people.txt"
     get_joseph_from_txt(file_location, joseph)  # 从文件读取并添加约瑟夫环成员
-    length = joseph.get_joseph_length()
-    print("约瑟夫环初始化后长度为:%d" % length)
+    joseph_length = joseph.get_joseph_length()
+    print("约瑟夫环初始化后长度为:%d" % joseph_length)
     step = 3
     start_number = 0
     try:
