@@ -1,6 +1,7 @@
 class People(object):
 
-    def __init__(self, name, age, sex, number):
+    def __init__(self, name, number, age=0, sex=0):
+        """初始化的值判断应该在外部还是内部"""
         self.name = name
         self._age = age
         self._sex = sex
@@ -12,15 +13,58 @@ class People(object):
 
     @age.setter
     def age(self, value):
-        self._age = value
+        if isinstance(value, int):
+            self._age = value
+        else:
+            raise ValueError("error: age must be int")
 
     @property
     def sex(self):
-        return self._sex
+        if self._sex == 0:
+            return "boy"
+        else:
+            return "girl"
 
     @sex.setter
     def sex(self, value):
-        self._sex = value
+        if value == 0 or value == 1:
+            self._sex = value
+        else:
+            raise ValueError("error: sex must be 0(boy) or 1(girl)")
 
     def __repr__(self):
-        return "people's name:%s, age:%s, sex:%s, number:%d" % (self.name, self._age, self._sex, self.number)
+        return "people's name:%s, age:%d, sex:%s, number:%d" % (self.name, self._age, self.sex, self.number)
+
+
+def test_people_age():
+    try:
+        people = People("A", 0, 12, 1)
+        people.age = "23"
+    except ValueError as ve:
+        print(ve)
+
+
+def test_people_sex():
+    try:
+        people = People("A", 1, 22, 1)
+        print(people)
+        people.sex = 0
+        assert people.sex == "boy"
+        people.sex = 1
+        assert people.sex == "girl"
+    except ValueError as ve:
+        print(ve)
+
+
+def test_people_sex2():
+    try:
+        people = People("A", 1, 22, 1)
+        people.sex = 3
+    except ValueError as ve:
+        print(ve)
+
+
+if __name__ == "__main__":
+    test_people_age()
+    test_people_sex()
+    test_people_sex2()

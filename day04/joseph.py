@@ -9,12 +9,14 @@ class Joseph(object):
     """
 
     def __init__(self):
-        self._iter = 0
         self._people_list = []
 
     def append(self, people):
         """添加people"""
-        self._people_list.append(people)
+        if isinstance(people, list):
+            self._people_list.extend(people)
+        else:
+            self._people_list.append(people)
 
     def pop(self, index):
         """根据索引删除people"""
@@ -27,19 +29,24 @@ class Joseph(object):
     def get_last_people(self, step, start_number):
         """获取约瑟夫环最后剩下的人"""
         if start_number + step < 0:
-            raise IndexError("error:起点加间隔小于0")
-        if step < 0 or step < len(self._people_list):
-            raise ValueError("error:间隔step小于0")
-        while len(self._people_list) > 1:
+            raise IndexError("error: 起点加间隔小于0")
+        if step < 0:
+            raise ValueError("error: 间隔step小于0")
+        if step > len(self._people_list):
+            raise IndexError("error: 间隔step大于总长度")
+
+        people_list_duplicate = self._people_list.copy()
+        while len(people_list_duplicate) > 1:
             for i in range(1, step):
-                if start_number >= len(self._people_list) - 1:
+                if start_number >= len(people_list_duplicate) - 1:
                     start_number = 0
                 else:
                     start_number += 1
-            self._people_list.pop(start_number)
-        return self._people_list[0]
+            people_list_duplicate.pop(start_number)
+        return people_list_duplicate[0]
 
     def __iter__(self):
+        self._iter = 0
         return self
 
     def __next__(self):
@@ -48,5 +55,4 @@ class Joseph(object):
             self._iter += 1
             return people
         else:
-            self._iter = 0
             raise StopIteration()
