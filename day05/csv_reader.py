@@ -41,9 +41,23 @@ class CsvReader(object):
                 yield csv_line
 
 
+def test_csv_get_people():
+    csv_reader = CsvReader("file/people.csv")
+    print(csv_reader.get_people_list())
+
+
+def test_csv_get_info():
+    csv_reader = CsvReader("file/people.csv")
+    print(csv_reader.get_csv_info())
+
+
+def test_csv_iter():
+    csv_reader = CsvReader("file/people.csv")
+    for line in csv_reader:
+        print(line)
+
+
 if __name__ == "__main__":
-    t = CsvReader("file/people.csv")
-    for i in t:
-        print(i)
-    print(t.get_people_list())
-    print(t.get_csv_info())
+    test_csv_get_people()
+    test_csv_get_info()
+    test_csv_iter()

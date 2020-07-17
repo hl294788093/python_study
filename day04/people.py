@@ -33,38 +33,32 @@ class People(object):
             raise ValueError("error: sex must be 0(boy) or 1(girl)")
 
     def __repr__(self):
-        return "people's name:%s, age:%d, sex:%s, number:%d" % (self.name, self._age, self.sex, self.number)
+        return "people's name:%s, age:%d, sex:%s, number:%d" % (
+            self.name, self._age, self.sex, self.number)
 
 
 def test_people_age():
-    try:
-        people = People("A", 0, 12, 1)
-        people.age = "23"
-    except ValueError as ve:
-        print(ve)
+    people = People("A", 0, 12, 1)
+    people.age = "23"
 
 
 def test_people_sex():
-    try:
-        people = People("A", 1, 22, 1)
-        print(people)
-        people.sex = 0
-        assert people.sex == "boy"
-        people.sex = 1
-        assert people.sex == "girl"
-    except ValueError as ve:
-        print(ve)
+    people = People("A", 1, 22, 1)
+    people.sex = 0
+    assert people.sex == "boy"
+    people.sex = 1
+    assert people.sex == "girl"
 
 
 def test_people_sex2():
-    try:
-        people = People("A", 1, 22, 1)
-        people.sex = 3
-    except ValueError as ve:
-        print(ve)
+    people = People("A", 1, 22, 1)
+    people.sex = 3
 
 
 if __name__ == "__main__":
-    test_people_age()
-    test_people_sex()
-    test_people_sex2()
+    try:
+        test_people_age()
+        test_people_sex()
+        test_people_sex2()
+    except ValueError as ve:
+        print(ve)
