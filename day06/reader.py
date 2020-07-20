@@ -1,3 +1,5 @@
+from typing import List
+
 from day04.people import People
 import json
 import csv
@@ -5,14 +7,19 @@ import zipfile
 
 
 class Reader(object):
+    ext = None
+
     def __init__(self, file_path):
         self._file_path = file_path
 
     def get_people_list(self):
-        pass
+        """实现查询文件返回people_list接口，多态是同一个行为具有多个不同表现形式或形态的能力."""
+        raise NotImplementedError
 
 
 class TxtReader(Reader):
+    ext = "txt"
+
     def get_people_list(self):
         people_list = []
         with open(self._file_path, "r") as fp:
@@ -24,6 +31,8 @@ class TxtReader(Reader):
 
 
 class CsvReader(Reader):
+    ext = "csv"
+
     def get_people_list(self):
         people_list = []
         with open(self._file_path, "r") as fp:
@@ -35,6 +44,8 @@ class CsvReader(Reader):
 
 
 class ZipReader(Reader):
+    ext = "zip"
+
     def get_people_list(self):
         file_name = self._file_path.split("/")[-1]
         zip_path = self._file_path.replace(("/" + file_name), "")
@@ -52,34 +63,3 @@ class ZipReader(Reader):
                     people = People(str_list[0].replace("\"", ""), int(str_list[1]), int(str_list[2]), int(str_list[3]))
                     people_list.append(people)
         return people_list
-
-
-def test_txt():
-    txt_reader = TxtReader("../day05/file/people.txt")
-    people_list = txt_reader.get_people_list()
-    print(people_list)
-
-
-def test_csv():
-    csv_reader = CsvReader("../day05/file/people.csv")
-    people_list = csv_reader.get_people_list()
-    print(people_list)
-
-
-def test_zip_txt():
-    zip_reader = ZipReader("../day05/file/people.zip/people.txt")
-    people_list = zip_reader.get_people_list()
-    print(people_list)
-
-
-def test_zip_csv():
-    zip_reader = ZipReader("../day05/file/people.zip/people.csv")
-    people_list = zip_reader.get_people_list()
-    print(people_list)
-
-
-if __name__ == "__main__":
-    test_txt()
-    test_csv()
-    test_zip_txt()
-    test_zip_csv()

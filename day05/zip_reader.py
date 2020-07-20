@@ -49,15 +49,15 @@ class ZipReader(object):
 def test_zip_txt():
     zip_reader = ZipReader("file/people.zip")
     people_list = zip_reader.get_people_list_from_txt("people.txt")
-    print(people_list)
+    assert len(people_list) == 10
 
 
 def test_zip_csv():
     zip_reader = ZipReader("file/people.zip")
     people_list = zip_reader.get_people_list_from_csv("people.csv")
-    # print(people_list)
+    assert len(people_list) == 10
 
 
 if __name__ == "__main__":
-    # test_zip_txt()
+    test_zip_txt()
     test_zip_csv()
