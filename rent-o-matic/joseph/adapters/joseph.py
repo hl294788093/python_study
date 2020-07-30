@@ -26,11 +26,11 @@ class Joseph(object):
     def get_last_people(self, step: int, start_number: int) -> People:
         """获取约瑟夫环最后剩下的人"""
         if start_number + step < 0:
-            raise IndexError("error: 起点加间隔小于0")
-        if step < 0:
-            raise ValueError("error: 间隔step小于0")
+            raise IndexError("起点加间隔小于0")
+        if step <= 0:
+            raise IndexError("间隔step小于等于0")
         if step > len(self._people_list):
-            raise IndexError("error: 间隔step大于总长度")
+            raise IndexError("间隔step大于总长度")
 
         people_list_duplicate = self._people_list.copy()
         while len(people_list_duplicate) > 1:

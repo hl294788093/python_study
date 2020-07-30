@@ -13,7 +13,7 @@ class CsvReader(Reader):
         with open(self._file_path, "r") as fp:
             csv_reader = csv.reader(fp)
             for str_people in csv_reader:
-                people = People(str_people[0], int(str_people[1]), int(str_people[2]), int(str_people[3]))
+                people = People(str_people[0], int(str_people[1]), int(str_people[2]))
                 people_list.append(people)
         return people_list
 

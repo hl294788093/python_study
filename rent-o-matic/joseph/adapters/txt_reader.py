@@ -12,7 +12,7 @@ class TxtReader(Reader):
         with open(self._file_path, "r") as fp:
             for str_people in fp:
                 people = json.loads(str_people,
-                                    object_hook=lambda x: People(x['name'], x['number'], x['age'], x['sex']))
+                                    object_hook=lambda x: People(x['name'], x['age'], x['sex']))
                 people_list.append(people)
         return people_list
 

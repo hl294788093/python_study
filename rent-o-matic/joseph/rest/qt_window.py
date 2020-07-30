@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMainWindow
+
 from joseph.interface.interface import Interface
 
 
@@ -17,7 +19,7 @@ class Ui_MainWindow(object):
     def __init__(self):
         self.interface = Interface()
 
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow: QMainWindow) -> None:
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(748, 619)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -40,8 +42,6 @@ class Ui_MainWindow(object):
         self.pushButton_start = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_start.setGeometry(QtCore.QRect(521, 380, 121, 32))
         self.pushButton_start.setObjectName("pushButton_start")
-        # 绑定执行约瑟夫环点击事件
-        self.pushButton_start.clicked.connect(self.push_button_start_clicked)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(190, 40, 131, 101))
         self.groupBox.setTitle("")
@@ -61,8 +61,6 @@ class Ui_MainWindow(object):
         self.pushButton_init = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_init.setGeometry(QtCore.QRect(351, 70, 121, 32))
         self.pushButton_init.setObjectName("pushButton_init")
-        # 绑定初始化人员点击事件
-        self.pushButton_init.clicked.connect(self.push_button_init_clicked)
         self.textEdit_list = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_list.setGeometry(QtCore.QRect(30, 180, 681, 171))
         self.textEdit_list.setObjectName("textEdit_list")
@@ -88,9 +86,10 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
+        self.bound_function()
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow: QMainWindow) -> None:
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "约瑟夫环"))
         self.label_2.setText(_translate("MainWindow", "起点："))
@@ -106,14 +105,35 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "当前人员列表："))
         self.label_7.setText(_translate("MainWindow", "最后剩余人员："))
 
-    def push_button_init_clicked(self):
+    def bound_function(self) -> None:
+        """按钮事件绑定"""
+        self.pushButton_init.clicked.connect(self.push_button_init_clicked)
+        self.pushButton_start.clicked.connect(self.push_button_start_clicked)
+        self.pushButton_start.setEnabled(False)  # 执行约瑟夫环按钮置为不可用
+
+    def push_button_init_clicked(self) -> None:
+        # 绑定初始化人员点击事件
         people_list = []
         if self.radioButton_txt.isChecked():
             people_list = self.interface.get_people_from_file("/Users/huangliang/Documents/python/PythonProject/python_study/rent-o-matic/data/people.txt")
         elif self.radioButton_csv.isChecked():
             people_list = self.interface.get_people_from_file("/Users/huangliang/Documents/python/PythonProject/python_study/rent-o-matic/data/people.csv")
         self.label_length.setText(str(len(people_list)))
-        # TODO:将人员列表展示在TEXT框中
+        # 将人员列表展示在TEXT框中
+        self.textEdit_list.clear()
+        for people in people_list:
+            self.textEdit_list.append(people.__str__())
+        self.pushButton_start.setEnabled(True)
 
-    def push_button_start_clicked(self):
-        print("pushButton_start_clicked")
+    def push_button_start_clicked(self) -> None:
+        # 绑定执行约瑟夫环点击事件
+        self.textEdit_last.clear()
+        try:
+            step = int(self.lineEdit_step.text())
+            start = int(self.lineEdit_start.text())
+            last_people = self.interface.get_last_people("joseph", step, start)
+            self.textEdit_last.append(last_people.__str__())
+        except IndexError as ie:
+            self.textEdit_last.append("error: " + str(ie))
+        except ValueError:
+            self.textEdit_last.append("error: 输入值不能为空")
