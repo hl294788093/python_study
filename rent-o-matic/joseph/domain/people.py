@@ -1,3 +1,6 @@
+from joseph.common.constant import *
+
+
 class People(object):
 
     cls_number = 0
@@ -18,21 +21,21 @@ class People(object):
         if isinstance(value, int):
             self._age = value
         else:
-            raise ValueError("error: age must be int")
+            raise ValueError(AGE_NOT_INT_ERROR)
 
     @property
     def sex(self) -> str:
         if self._sex == 0:
-            return "boy"
+            return SEX_0
         else:
-            return "girl"
+            return SEX_1
 
     @sex.setter
     def sex(self, value: int) -> None:
         if value == 0 or value == 1:
             self._sex = value
         else:
-            raise ValueError("error: sex must be 0(boy) or 1(girl)")
+            raise ValueError(SEX_ERROR)
 
     @property
     def number(self) -> int:

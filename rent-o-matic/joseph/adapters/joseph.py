@@ -1,5 +1,6 @@
 from typing import List
 
+from joseph.common.constant import *
 from joseph.domain.people import People
 
 
@@ -26,11 +27,13 @@ class Joseph(object):
     def get_last_people(self, step: int, start_number: int) -> People:
         """获取约瑟夫环最后剩下的人"""
         if start_number + step < 0:
-            raise IndexError("起点加间隔小于0")
+            raise IndexError(STEP_ADD_START_UNDER_ZERO_ERROR)
         if step <= 0:
-            raise IndexError("间隔step小于等于0")
+            raise IndexError(STEP_UNDER_ZERO_ERROR)
         if step > len(self._people_list):
-            raise IndexError("间隔step大于总长度")
+            raise IndexError(STEP_OVER_LENGTH_ERROR)
+        if start_number > len(self._people_list):
+            raise IndexError(START_OVER_LENGTH_ERROR)
 
         people_list_duplicate = self._people_list.copy()
         while len(people_list_duplicate) > 1:
