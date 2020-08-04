@@ -1,7 +1,11 @@
 from typing import List
 
-from joseph.common.constant import *
 from joseph.domain.people import People
+
+STEP_ADD_START_UNDER_ZERO_ERROR = "error: 起点加间隔小于0"
+STEP_UNDER_ZERO_ERROR = "error: 间隔step小于等于0"
+STEP_OVER_LENGTH_ERROR = "error: 间隔step大于总长度"
+START_OVER_LENGTH_ERROR = "error: 起点start大于总长度"
 
 
 class Joseph(object):

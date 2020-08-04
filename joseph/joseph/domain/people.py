@@ -1,4 +1,7 @@
-from joseph.common.constant import *
+AGE_NOT_INT_ERROR = "error: age must be int"
+SEX_ERROR = "error: sex must be 0(boy) or 1(girl)"
+SEX_0 = "boy"
+SEX_1 = "girl"
 
 
 class People(object):

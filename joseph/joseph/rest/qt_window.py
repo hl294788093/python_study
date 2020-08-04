@@ -13,7 +13,16 @@ from PyQt5.QtWidgets import QMainWindow
 
 from joseph.domain.people import People
 from joseph.interface.interface import Interface
-from joseph.common.constant import *
+
+
+TXT_SUFFIX = ".txt"
+CSV_SUFFIX = ".csv"
+ZIP_SUFFIX = ".zip"
+TXT_PATH = "/Users/huangliang/Documents/python/PythonProject/python_study/rent-o-matic/data/people.txt"
+CSV_PATH = "/Users/huangliang/Documents/python/PythonProject/python_study/rent-o-matic/data/people.csv"
+ZIP_PATH = "/Users/huangliang/Documents/python/PythonProject/python_study/rent-o-matic/data/people.zip"
+CONTAINER_JOSEPH = "joseph"
+NULL_INPUT_ERROR = "error: 输入值不能为空"
 
 
 class Ui_MainWindow(object):

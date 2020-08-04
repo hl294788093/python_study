@@ -1,8 +1,9 @@
 from typing import List
 
 from joseph.adapters.joseph import Joseph
-from joseph.common.constant import CONTAINER_JOSEPH
 from joseph.domain.people import People
+
+CONTAINER_JOSEPH = "joseph"
 
 
 class ContainerUseCase(object):

@@ -5,7 +5,10 @@ from joseph.adapters.csv_reader import CsvReader
 from joseph.adapters.txt_reader import TxtReader
 from joseph.adapters.zip_reader import ZipReader
 from joseph.domain.reader import Reader
-from joseph.common.constant import *
+
+TXT_SUFFIX = ".txt"
+CSV_SUFFIX = ".csv"
+ZIP_SUFFIX = ".zip"
 
 
 class FileUseCase(object):
